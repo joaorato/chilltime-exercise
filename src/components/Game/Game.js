@@ -7,6 +7,7 @@ import LeaderBoard from "../LeaderBoard/LeaderBoard";
 class Game extends React.Component {
   constructor(props) {
     super(props);
+    //initialize state for future reset
     this.initialState = {
       cardArray: [],
       clickCounter: 0,
@@ -16,10 +17,12 @@ class Game extends React.Component {
     this.state = this.initialState;
     //function needs to be bound to be used in child component (Card.js)
     this.clickCard = this.clickCard.bind(this);
+    //function to control time elapse
     this.tick = this.tick.bind(this);
     this.playerName = "Player Name"
   }
 
+  //time controls
   tick() {
     this.setState({timeElapsed: this.state.timeElapsed + 1});
   }
@@ -78,6 +81,9 @@ class Game extends React.Component {
     }
   }
 
+  //checks if two selected cards belong to the same type
+  //if so, it does the same with the 3rd card
+  //the solved trios are put in a RESOLVED state
   checkType(_position){
     var _cardArray = this.state.cardArray;
     var _visibleCards = [];
@@ -121,6 +127,7 @@ class Game extends React.Component {
     }
   }
 
+  //attempt to still visualize the card even when it is wrong
   treatFailed(){
     var _cardArray = this.state.cardArray;
     for ( var i = 0; i < table.length; i++){
@@ -144,6 +151,7 @@ class Game extends React.Component {
     });
   }
 
+  //displays the score board and time elapsed
   renderScoreBoard(){
     return (
       <>
@@ -154,6 +162,7 @@ class Game extends React.Component {
       );
   }
 
+  //checks if all trios have been found (27 cards in a 28 card game)
   checkGameOver(){
     var count = 0;
     for (var i = 0; i < table.length; i++) {
@@ -169,6 +178,7 @@ class Game extends React.Component {
     }
   }
 
+  //resets the game when the button "Play Again" is pressed after Game Over
   reset(e){
     e.preventDefault();
     this.setState(this.initialState);
@@ -177,6 +187,7 @@ class Game extends React.Component {
     clearInterval(this.interval)
   }
 
+  //part of an unsuccessful attempt at exercise B
   saveScoreToLeaderboard(){
     return (
       <LeaderBoard
