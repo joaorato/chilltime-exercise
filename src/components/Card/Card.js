@@ -3,6 +3,8 @@ import styles from "./Card.css";
 
 console.log("styles");
 console.log(styles);
+
+//custom displays for the cards
 const Card = ({ cardType, cardState, onClick, styles }) => {
   if(cardState === "INVISIBLE"){
     return (
