@@ -1,6 +1,7 @@
 import React from "react";
 import "./LeaderBoard.css";
 
+//attempt at exercise B
 const LeaderBoard = ({ playerName, tries, timeElapsed, finalScore }) => {
   return (
     <>
